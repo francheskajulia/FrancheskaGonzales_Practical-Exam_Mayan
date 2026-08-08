@@ -28,7 +28,7 @@ Fullstack Task Management Application
 - cd backend
 a. Create a PostgreSQL database
 b. Run the schema file to create  the tasks table:
-- psql -U [username] -d [database_name] -f schema.sql
+- psql -U postgres -d [database_name] -f schema.sql
 **Replace [username] and [database_name] with your own PostgreSQL username and database name.
 
 3. Backend Setup
