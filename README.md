@@ -21,34 +21,24 @@ Fullstack Task Management Application
 
 ## SETUP INSTRUCTIONS
 1. Clone the repository
-\`\`\`
-git clone https://github.com/francheskajulia/FrancheskaGonzales_Practical-Exam_Mayan
-cd FrancheskaGonzales_Practical-Exam_Mayan
-\`\`\`
+- git clone https://github.com/francheskajulia/FrancheskaGonzales_Practical-Exam_Mayan
+- cd FrancheskaGonzales_Practical-Exam_Mayan
 
 2. Database Setup
-\`\`\`
-cd backend
-\`\`\`
+- cd backend
 a. Create a PostgreSQL database
 b. Run the schema file to create  the tasks table:
-\`\`\`
-psql -U [username] -d [database_name] -f schema.sql
-\`\`\`
+- psql -U [username] -d [database_name] -f schema.sql
 **Replace [username] and [database_name] with your own PostgreSQL username and database name.
 
 3. Backend Setup
-\`\`\`
-npm install
-npm run dev
-\`\`\`
+- npm install
+- npm run dev
 
 4. Frontend Setup
-\`\`\`
-cd ../frontend
-npm install
-npm run dev
-\`\`\`
+- cd ../frontend
+- npm install
+- npm run dev
 
 The app will be running at `http://localhost:5173/`
 
