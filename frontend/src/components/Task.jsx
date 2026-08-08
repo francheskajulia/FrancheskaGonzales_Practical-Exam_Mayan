@@ -4,14 +4,6 @@ import { useTaskContext } from '../hook/useTaskContext';
 
 function Task({ task, markTask, editTask, onSuccess, onError }){
     const { dispatch } = useTaskContext();
-    // const setMark = (e, status, taskId) => {
-    //     e.preventDefault();
-    //     const details = {
-    //         status: status, 
-    //         taskId: taskId
-    //     }
-    //     taskDetails(details);
-    // }
 
     const MarkTask = async(e, status, taskId) => {
         try{
