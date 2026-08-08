@@ -26,9 +26,13 @@ Fullstack Task Management Application
 
 2. Database Setup
 - cd backend
+
 a. Create a PostgreSQL database
+
 b. Run the schema file to create  the tasks table:
+
 - psql -U postgres -d TaskApp -f schema.sql
+
 Note: If you change the PostgreSQL username or database name, make sure to update the corresponding values in backend/config/dbcon.js as well.
 
 3. Backend Setup
