@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+.text-color{
+  color: #060709
+}
+
+.primary-color{
+  background-color: #88a0ff
+}
+
+.secondary-color{
+  background-color: #c7d3df
+}
+
+.background-color{
+  background-color: #f8f8f8
+}
+
+.outfit-500 {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+button{
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #88a0ff;
+    border-radius: 10px;
+}
