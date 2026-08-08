@@ -26,10 +26,10 @@ Fullstack Task Management Application
 
 2. Database Setup
 - cd backend
-## a. Create a PostgreSQL database
-## b. Run the schema file to create  the tasks table:
+a. Create a PostgreSQL database
+b. Run the schema file to create  the tasks table:
 - psql -U [username] -d [database_name] -f schema.sql
-## **Replace [username] and [database_name] with your own PostgreSQL username and database name.
+**Replace [username] and [database_name] with your own PostgreSQL username and database name.
 
 3. Backend Setup
 - npm install
