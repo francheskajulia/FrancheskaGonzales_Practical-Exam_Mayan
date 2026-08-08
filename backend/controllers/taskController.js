@@ -40,7 +40,7 @@ const createTask = async (req, res) => {
     let result;
 
     try{
-        const query = `INSERT INTO task(title, description, createdAt) VALUES (TRIM($1), TRIM($2), TRIM($3)) RETURNING task_id`;
+        const query = `INSERT INTO task(title, description, createdAt) VALUES (TRIM($1), TRIM($2), $3) RETURNING task_id`;
         result = await db.query(query, [title, description, createdAt]);
         
         const ticket_id = result.rows[0].task_id;
