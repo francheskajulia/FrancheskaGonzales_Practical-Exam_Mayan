@@ -21,12 +21,51 @@ function EditTaskModal({ taskDetails, isOpen, isClose, deleteDetails, onSuccess,
     const saveTask = async(e) => {
         e.preventDefault();
         
-        if(title != '' && description != ''){
+        if(title.trim() != '' && description.trim() != ''){
             const task = {title, description};
-            const response = await fetch(`/api/task/${taskId}`, {
+            try{
+                const response = await fetch(`/api/task/${taskId}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify(task),
+                    headers:{
+                        'Content-Type' : 'application/json'
+                    }
+                })
+
+                const json = await response.json();
+
+                if(!response.ok){
+                    onError(json.error);
+                }
+
+                if(response.ok){
+                    isClose();
+                    onSuccess(json.message);
+                    dispatch({type: 'UPDATE_TASK', payload: json.task[0]});
+                    console.log(json.task[0]);
+                }
+            }catch(err){
+                isClose();
+                onError('Something went wrong. Please try again.');
+            }
+        }else{
+            setError(true);
+        }
+        
+    }
+
+    const deleteTask = (e) => {
+        e.preventDefault();
+        deleteDetails(taskDetails);
+    }
+
+    const markTask = async(e, status, taskId) => {
+        e.preventDefault();
+        try{
+            const response = await fetch(`/api/task/mark/${taskId}`, {
                 method: 'PATCH',
-                body: JSON.stringify(task),
-                headers:{
+                body: JSON.stringify({status}),
+                headers: {
                     'Content-Type' : 'application/json'
                 }
             })
@@ -38,20 +77,14 @@ function EditTaskModal({ taskDetails, isOpen, isClose, deleteDetails, onSuccess,
             }
 
             if(response.ok){
-                isClose();
                 onSuccess(json.message);
-                dispatch({type: 'UPDATE_TASK', payload: json.task[0]});
-                console.log(json.task[0]);
+                isClose();
+                dispatch({type: 'UPDATE_TASK', payload: json.task[0]})
             }
-        }else{
-            setError(true);
+        }catch(err){
+            isClose();
+            onError('Something went wrong. Please try again.');
         }
-        
-    }
-
-    const deleteTask = (e) => {
-        e.preventDefault();
-        deleteDetails(taskDetails);
     }
 
     return (
@@ -78,7 +111,9 @@ function EditTaskModal({ taskDetails, isOpen, isClose, deleteDetails, onSuccess,
                 </div>
                 <div className='text-sm flex justify-between items-center gap-2 mt-3'>
                     <button onClick={deleteTask} className='flex-1 border border-red-700 py-1 bg-red-800 text-white rounded-md'>Delete</button>
-                    <button className='flex-1 primary-color text-white text-center py-1 border border-[#88a0ff] rounded-md'>Save</button>
+                    {taskDetails.status == 'Active' ? 
+                        (<button className='flex-1 primary-color text-white text-center py-1 border border-[#88a0ff] rounded-md'>Save</button>) : 
+                        (<button type='button' onClick={(e) => markTask(e, 'Active', taskDetails.task_id)} className='flex-1 primary-color text-white text-center py-1 border border-[#88a0ff] rounded-md'>Mark as Active</button>)}
                 </div>
             </form>
         </div>

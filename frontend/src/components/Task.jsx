@@ -14,23 +14,27 @@ function Task({ task, markTask, editTask, onSuccess, onError }){
     // }
 
     const MarkTask = async(e, status, taskId) => {
-        const response = await fetch(`/api/task/mark/${taskId}`, {
-            method: 'PATCH',
-            body: JSON.stringify({status}),
-            headers: {
-                'Content-Type' : 'application/json'
+        try{
+            const response = await fetch(`/api/task/mark/${taskId}`, {
+                method: 'PATCH',
+                body: JSON.stringify({status}),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })
+
+            const json = await response.json();
+
+            if(!response.ok){
+                onError(json.error);
             }
-        })
 
-        const json = await response.json();
-
-        if(!response.ok){
-            onError(json.error);
-        }
-
-        if(response.ok){
-            onSuccess(json.message);
-            dispatch({type: 'UPDATE_TASK', payload: json.task[0]})
+            if(response.ok){
+                onSuccess(json.message);
+                dispatch({type: 'UPDATE_TASK', payload: json.task[0]})
+            }
+        }catch(err){
+            onError('Something went wrong. Please try again.');
         }
     }
 

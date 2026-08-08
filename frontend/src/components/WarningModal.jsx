@@ -18,23 +18,28 @@ function WarningModal({ isOpen, isClose, task, onSuccess, onError }) {
     const deleteTask = async(e) => {
         e.preventDefault();
 
-        const response = await fetch(`/api/task/${taskId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type' : 'application/json'
+        try{
+            const response = await fetch(`/api/task/${taskId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })
+
+            const json = await response.json();
+
+            if(!response.ok){
+                onError(json.error);
             }
-        })
 
-        const json = await response.json();
-
-        if(!response.ok){
-            onError(json.error);
-        }
-
-        if(response.ok){
+            if(response.ok){
+                isClose();
+                dispatch({type: 'DELETE_TASK', payload: json.task[0]});
+                onSuccess(json.message);
+            }
+        }catch(err){
             isClose();
-            dispatch({type: 'DELETE_TASK', payload: json.task[0]});
-            onSuccess(json.message);
+            onError('Something went wrong. Please try again.');
         }
     }
     return (

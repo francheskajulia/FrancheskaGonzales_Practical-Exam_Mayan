@@ -13,26 +13,33 @@ function AddTaskModal({ isOpen, isClose, onSuccess, onError }) {
     const saveTask = async(e) => {
         e.preventDefault();
         
-        if(title != '' && description != ''){
+        if(title.trim() != '' && description.trim() != ''){
             const task = {title, description};
-            const response = await fetch(`/api/task/`, {
-                method: 'POST',
-                body: JSON.stringify(task),
-                headers:{
-                    'Content-Type' : 'application/json'
+            try{
+                const response = await fetch(`/api/task/`, {
+                    method: 'POST',
+                    body: JSON.stringify(task),
+                    headers:{
+                        'Content-Type' : 'application/json'
+                    }
+                })
+
+                const json = await response.json();
+
+                if(!response.ok){
+                    onError(json.error);
                 }
-            })
 
-            const json = await response.json();
-
-            if(!response.ok){
-                onError(json.error);
-            }
-
-            if(response.ok){
+                if(response.ok){
+                    setTitle('');
+                    setDescription('');
+                    isClose();
+                    onSuccess(json.message);
+                    dispatch({type: 'CREATE_TASK', payload: json.task[0]});
+                }
+            }catch(err){
                 isClose();
-                onSuccess(json.message);
-                dispatch({type: 'CREATE_TASK', payload: json.task[0]});
+                onError('Something went wrong. Please try again.');
             }
         }else{
             setError(true);

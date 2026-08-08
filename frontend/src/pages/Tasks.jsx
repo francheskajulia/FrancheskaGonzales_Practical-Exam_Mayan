@@ -95,9 +95,9 @@ function Tasks(){
     return(
         <div className='outfit-500 relative  bg-gray-50'>
             
-            <div className='flex flex-col gap-9 bg-gray-50 min-h-screen px-10 md:px-30 py-8'>
+            <div className='flex flex-col gap-9 bg-gray-50 min-h-screen px-10 lg:px-30 py-8'>
                 <Header pageTitle="My Tasks"/>
-                <div className='flex justify-between items-center flex-col md:flex-row md:flex-nowrap border-b border-gray-400 pb-3 gap-y-3 '>
+                <div className='flex justify-between items-center flex-col lg:flex-row lg:flex-nowrap border-b border-gray-400 pb-3 gap-y-3 '>
                     <div className='flex overflow-x-auto gap-3 scrollbar-hide'>
                         <StatusButton status="All" currentStatus={status} icon='text-slate-600' statusDetails={handleStatusChange}/>
                         <StatusButton status="Active" currentStatus={status} icon='text-blue-600' statusDetails={handleStatusChange}/>
@@ -127,7 +127,7 @@ function Tasks(){
                         <Task key={task.task_id} task={task} 
                             markTask={handleUpdateMark}
                             editTask={handleEditTask}
-                            onMessage={handleSuccessMessage}
+                            onSuccess={handleSuccessMessage}
                             onError={handleErrorMessage}/>
                     )) : (
                         <p className='text-gray-500'>No tasks found.</p>
