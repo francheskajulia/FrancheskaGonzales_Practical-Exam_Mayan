@@ -44,7 +44,7 @@ function Task({ task, markTask, editTask, onSuccess, onError }){
                         <i className=" text-gray-500 text-xs fi fi-ss-pencil"></i>
                     </button>
                 </div>
-                <span className='text-md font-bold'>{task.title}</span>
+                <span className='wrap-anywhere text-md font-bold'>{task.title}</span>
                 <p className='text-sm -mt-2 text-justify text-gray-500'>{task.description}</p>
 
                 {task.status != 'Completed' && task.status != 'Incomplete' ? (<div className='border-t border-gray-300 pt-3 flex justify-end items-center'>

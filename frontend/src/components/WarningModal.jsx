@@ -52,7 +52,7 @@ function WarningModal({ isOpen, isClose, task, onSuccess, onError }) {
                 </div>
                 <div className='flex flex-col justify-center w-full items-center py-5'>
                     <span>Are you sure you want to delete</span>
-                    <span>"<span className='text-red-800'>{task.title}</span>"?</span>
+                    <span className='text-center'>"<span className='text-red-800'>{task.title}</span>"?</span>
                     <span>This action cannot be undone.</span>
                 </div>
                 <div className='text-sm flex justify-between items-center gap-2 mt-3'>
